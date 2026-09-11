@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Reasoning Model (From Scratch) · 中英双语版</title>
+<meta name="description" content="从零开始构建推理模型 Build a Reasoning Model (From Scratch) 中英双语在线读本">
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --border:#30363d; --fg:#e6edf3;
+    --muted:#8b949e; --accent:#58a6ff; --accent2:#3fb950;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 600px at 20% -10%, rgba(88,166,255,.15), transparent 60%),
+               radial-gradient(1000px 500px at 90% 110%, rgba(63,185,80,.12), transparent 60%), var(--bg);
+    color:var(--fg); line-height:1.7; min-height:100vh;}
+  .wrap{max-width:960px;margin:0 auto;padding:56px 24px 80px}
+  header{text-align:center;margin-bottom:48px}
+  .badge{display:inline-block;font-size:13px;letter-spacing:.12em;padding:6px 16px;border:1px solid var(--border);
+    border-radius:999px;color:var(--muted);margin-bottom:20px;text-transform:uppercase}
+  h1{font-size:clamp(28px,6vw,46px);font-weight:800;line-height:1.15;margin-bottom:10px;
+    background:linear-gradient(120deg,#58a6ff,#3fb950);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  h2{font-size:clamp(18px,3.5vw,26px);font-weight:600;color:var(--muted);margin-bottom:14px}
+  .sub{color:var(--muted);max-width:640px;margin:0 auto;font-size:16px}
+  .dots{color:var(--accent2);font-weight:600;margin-top:8px;letter-spacing:.35em}
+  .cover{max-width:340px;margin:36px auto 40px;border-radius:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);border:1px solid var(--border)}
+  .cover img{width:100%;display:block;border-radius:14px}
+  .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:10px;font-size:16px;font-weight:600;
+    text-decoration:none;transition:transform .15s ease, box-shadow .15s ease, background .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(120deg,#238636,#1a7f37);color:#fff;box-shadow:0 8px 24px -8px rgba(35,134,54,.7)}
+  .btn-primary:hover{background:linear-gradient(120deg,#2ea043,#238636)}
+  .btn-ghost{border:1px solid var(--border);color:var(--fg);background:var(--card)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  section{background:linear-gradient(180deg,var(--card),rgba(22,27,34,.6));border:1px solid var(--border);border-radius:14px;
+    padding:28px 30px;margin-top:28px}
+  section h3{font-size:20px;font-weight:700;margin-bottom:14px;color:var(--accent)}
+  section p,section ul{color:var(--muted);font-size:15px}
+  section ul{padding-left:20px;margin-top:8px;display:grid;grid:auto/1fr 1fr;gap:6px 24px}
+  @media(max-width:560px){section ul{grid:auto/1fr}}
+  .meta{display:grid;grid:auto/auto auto;gap:10px 40px;justify-content:center;margin-top:6px;color:var(--muted);font-size:14px}
+  .meta b{color:var(--fg)}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:48px;opacity:.7}
+  .code-link{color:var(--accent);text-decoration:none}
+  .code-link:hover{text-decoration:underline}
+  @media(prefers-color-scheme:light){
+    :root{--bg:#f6f8fa;--card:#ffffff;--border:#d0d7de;--fg:#1f2328;--muted:#57606a}
+    body{background:radial-gradient(1200px 600px at 20% -10%, rgba(88,166,255,.12), transparent 60%), #f6f8fa}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="badge">MEAP · Manning Early Access · Version 8</span>
+      <h1>Build a Reasoning Model</h1>
+      <div class="dots">· FROM SCRATCH ·</div>
+      <h2>构建推理模型（从零开始） · 中英双语对照版</h2>
+      <p class="sub">一本关于构建具备推理能力的大语言模型（LLM）的实践指南 —— 从预训练基础模型出发，逐步用代码为它添加各阶段推理能力。</p>
+      <div class="meta">
+        <span>© Copyright 2026 <b>Manning Publications</b> 曼宁出版公司</span>
+        <span>来源项目 <b>Build a Reasoning Model</b></span>
+      </div>
+    </header>
+
+    <div class="cover">
+      <img src="cover.jpg" alt="Build a Reasoning Model From Scratch 封面">
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="book.html">▶ 在线阅读本书</a>
+      <a class="btn btn-ghost" href="Build-a-Reasoning-Model-From-Scratch.pdf" download>⬇ 下载 PDF（29 MB）</a>
+    </div>
+
+    <section>
+      <h3>本书内容</h3>
+      <p>推理是近年来提升大语言模型性能最令人振奋的重要进展之一，也是较容易被误解的概念——尤其是当你只在理论层面听说「推理」这个词时。</p>
+      <p>这本书采用实践导向：从一个预训练的基础 LLM 入手，逐行编写代码、分阶段为它添加推理能力，让你直观地看到推理系统究竟是如何工作的。全书为中英双语对照。</p>
+    </section>
+
+    <section>
+      <h3>你将掌握的阶段</h3>
+      <ul>
+        <li>多步思维链推理</li>
+        <li>SFT 监督微调</li>
+        <li>RLHF 偏好优化</li>
+        <li>GRPO 强化学习</li>
+        <li>推理模型训练管线</li>
+        <li>评测与部署思路</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>配套资源</h3>
+      <p>配套代码：<a class="code-link" href="https://github.com/rasbt/reasoning-from-scratch" target="_blank" rel="noopener">github.com/rasbt/reasoning-from-scratch</a></p>
+      <p>使用浏览器打开即可在线阅读，无需任何安装。阅读体验在桌面端与移动端均适配。</p>
+    </section>
+
+    <footer>
+      Build a Reasoning Model (From Scratch) · Build-a-Reasoning-Model-From-Scratch-CN-EN · 静态托管于 GitHub Pages
+    </footer>
+  </div>
+</body>
+</html>
