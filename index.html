@@ -3,128 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Build a Reasoning Model (From Scratch) · 中英双语版</title>
-<meta name="description" content="从零开始构建推理模型 Build a Reasoning Model (From Scratch) 中英双语在线读本">
+<title>访问验证 · Build a Reasoning Model</title>
+<meta name="robots" content="noindex, nofollow">
 <style>
   :root{
     --bg:#0d1117; --card:#161b22; --border:#30363d; --fg:#e6edf3;
-    --muted:#8b949e; --accent:#58a6ff; --accent2:#3fb950; --pdf:#f85149;
+    --muted:#8b949e; --accent:#58a6ff; --accent2:#3fb950; --pdf:#f85149; --err:#f85149;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
-    background:radial-gradient(1200px 600px at 20% -10%, rgba(88,166,255,.15), transparent 60%),
-               radial-gradient(1000px 500px at 90% 110%, rgba(63,185,80,.12), transparent 60%), var(--bg);
-    color:var(--fg); line-height:1.7; min-height:100vh;}
-  .wrap{max-width:960px;margin:0 auto;padding:56px 24px 80px}
-  header{text-align:center;margin-bottom:44px}
-  .badge{display:inline-block;font-size:13px;letter-spacing:.12em;padding:6px 16px;border:1px solid var(--border);
-    border-radius:999px;color:var(--muted);margin-bottom:20px;text-transform:uppercase}
-  h1{font-size:clamp(28px,6vw,46px);font-weight:800;line-height:1.15;margin-bottom:10px;
-    background:linear-gradient(120deg,#58a6ff,#3fb950);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  h2{font-size:clamp(18px,3.5vw,26px);font-weight:600;color:var(--muted);margin-bottom:14px}
-  .sub{color:var(--muted);max-width:640px;margin:0 auto;font-size:16px}
-  .dots{color:var(--accent2);font-weight:600;margin-top:8px;letter-spacing:.35em}
-  .cover-wrap{max-width:340px;margin:36px auto 40px;position:relative}
-  .cover{max-width:340px;border-radius:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);border:1px solid var(--border)}
-  .cover img{width:100%;display:block;border-radius:14px}
-  .pdf-tag{position:absolute;top:-16px;right:-20px;background:linear-gradient(135deg,var(--pdf),#b62324);color:#fff;
-    font-weight:800;font-size:15px;letter-spacing:.06em;padding:8px 16px;border-radius:12px;transform:rotate(6deg);
-    box-shadow:0 12px 24px -8px rgba(248,81,73,.6);border:1px solid rgba(255,255,255,.18)}
-  .pdf-tag small{display:block;font-weight:600;font-size:10.5px;opacity:.85;letter-spacing:.08em}
-  .actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:stretch}
-  .btn{display:inline-flex;align-items:center;gap:12px;padding:15px 30px;border-radius:12px;font-size:16px;font-weight:600;
-    text-decoration:none;transition:transform .15s ease, box-shadow .15s ease, background .2s, border-color .2s}
-  .btn:hover{transform:translateY(-2px)}
-  .btn-primary{background:linear-gradient(120deg,#238636,#1a7f37);color:#fff;box-shadow:0 8px 24px -8px rgba(35,134,54,.7)}
-  .btn-primary:hover{background:linear-gradient(120deg,#2ea043,#238636)}
-  .btn-download{border:1px solid var(--border);color:var(--fg);background:var(--card);padding:12px 20px;border-radius:12px;}
-  .btn-download:hover{border-color:var(--pdf);box-shadow:0 8px 24px -10px rgba(248,81,73,.5)}
-  .pdf-badge{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;
-    background:linear-gradient(135deg,var(--pdf),#b62324);color:#fff;font-weight:800;font-size:13px;letter-spacing:.04em;
-    box-shadow:0 6px 14px -6px rgba(248,81,73,.7)}
-  .dl-info{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
-  .dl-info b{font-size:15.5px}
-  .dl-info span{font-size:12px;color:var(--muted);display:inline-flex;align-items:center;gap:5px}
-  .dl-arrow{transition:transform .2s ease}
-  .btn-download:hover .dl-arrow{transform:translateY(3px)}
-  .dl-note{margin-top:14px;text-align:center;color:var(--muted);font-size:13px}
-  section{background:linear-gradient(180deg,var(--card),rgba(22,27,34,.6));border:1px solid var(--border);border-radius:14px;
-    padding:28px 30px;margin-top:28px}
-  section h3{font-size:20px;font-weight:700;margin-bottom:14px;color:var(--accent)}
-  section p,section ul{color:var(--muted);font-size:15px}
-  section ul{padding-left:20px;margin-top:8px;display:grid;grid:auto/1fr 1fr;gap:6px 24px}
-  @media(max-width:560px){section ul{grid:auto/1fr}}
-  .meta{display:grid;grid:auto/auto auto;gap:10px 40px;justify-content:center;margin-top:6px;color:var(--muted);font-size:14px}
-  .meta b{color:var(--fg)}
-  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:48px;opacity:.7}
-  .code-link{color:var(--accent);text-decoration:none}
-  .code-link:hover{text-decoration:underline}
+    background:radial-gradient(1100px 550px at 50% -10%, rgba(88,166,255,.14), transparent 60%), var(--bg);
+    color:var(--fg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .gate{width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:40px 36px;text-align:center;
+    box-shadow:0 24px 60px -24px rgba(0,0,0,.7)}
+  .lock{width:64px;height:64px;margin:0 auto 22px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#238636,#1a7f37);box-shadow:0 12px 26px -10px rgba(35,134,54,.8)}
+  .lock svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  h1{font-size:20px;font-weight:700;margin-bottom:6px}
+  p.sub{color:var(--muted);font-size:13.5px;margin-bottom:26px;line-height:1.6}
+  form{display:flex;flex-direction:column;gap:12px}
+  .field{position:relative}
+  .field input{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--fg);
+    font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
+  .field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(88,166,255,.18)}
+  button{width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;
+    background:linear-gradient(120deg,#238636,#1a7f37);color:#fff;transition:transform .15s,box-shadow .2s}
+  button:hover{background:linear-gradient(120deg,#2ea043,#238636);transform:translateY(-1px)}
+  .err{color:var(--err);font-size:13px;min-height:18px;font-weight:600}
+  .err+.err-slot{display:none}
+  .hint{color:var(--muted);font-size:12px;margin-top:18px;line-height:1.6;opacity:.8}
+  /* error shake */
+  @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}
+  .shake{animation:shake .5s}
+  /* post-login */
+  .unlocked{display:none}
+  .unlocked.on{display:block;animation:fadeIn .4s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .unlocked .ok{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#2ea043,#238636);color:#fff;box-shadow:0 12px 26px -10px rgba(46,160,67,.9)}
+  .unlocked h1{margin-bottom:18px}
+  .unlocked .acts{display:flex;flex-direction:column;gap:12px}
+  .unlocked a{display:block;padding:14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px}
+  .a-read{background:linear-gradient(120deg,#238636,#1a7f37);color:#fff}
+  .a-read:hover{background:linear-gradient(120deg,#2ea043,#238636)}
+  .a-pdf{background:var(--card);border:1px solid var(--border);color:var(--fg);display:flex;align-items:center;justify-content:center;gap:10px}
+  .a-pdf:hover{border-color:var(--pdf);color:var(--pdf)}
+  .pdf-tag{background:linear-gradient(135deg,var(--pdf),#b62324);color:#fff;font-weight:800;font-size:11px;border-radius:6px;padding:3px 7px;letter-spacing:.04em}
+  .logout{background:none;border:1px solid var(--border);color:var(--muted);margin-top:16px;padding:10px;font-size:13px;border-radius:8px;cursor:pointer}
+  .logout:hover{border-color:var(--err);color:var(--err);background:none}
   @media(prefers-color-scheme:light){
     :root{--bg:#f6f8fa;--card:#ffffff;--border:#d0d7de;--fg:#1f2328;--muted:#57606a}
-    body{background:radial-gradient(1200px 600px at 20% -10%, rgba(88,166,255,.12), transparent 60%), #f6f8fa}
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <span class="badge">MEAP · Manning Early Access · Version 8</span>
-      <h1>Build a Reasoning Model</h1>
-      <div class="dots">· FROM SCRATCH ·</div>
-      <h2>构建推理模型（从零开始） · 中英双语对照版</h2>
-      <p class="sub">一本关于构建具备推理能力的大语言模型（LLM）的实践指南 —— 从预训练基础模型出发，逐步用代码为它添加各阶段推理能力。</p>
-      <div class="meta">
-        <span>© Copyright 2026 <b>Manning Publications</b> 曼宁出版公司</span>
-        <span>来源项目 <b>Build a Reasoning Model</b></span>
+  <div class="gate">
+    <!-- LOGIN STATE -->
+    <div id="loginView">
+      <div class="lock">
+        <svg viewBox="0 0 24 24" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
       </div>
-    </header>
-
-    <div style="text-align:center">
-      <div class="cover-wrap">
-        <div class="cover"><img src="cover.jpg" alt="Build a Reasoning Model From Scratch 封面"></div>
-        <div class="pdf-tag">PDF<small>可离线阅读</small></div>
-      </div>
+      <h1>访问需验证</h1>
+      <p class="sub">本书仅对受邀读者开放<br>请输入访问密码后继续</p>
+      <form id="form">
+        <div class="field">
+          <input type="password" id="pwd" placeholder="请输入访问密码" autocomplete="off" autofocus>
+        </div>
+        <div class="err" id="err"></div>
+        <button type="submit">进入</button>
+      </form>
+      <p class="hint">密码正确后将解锁在线阅读与 PDF 下载。该页面不会在搜索引擎中收录。</p>
     </div>
 
-    <div class="actions">
-      <a class="btn btn-primary" href="book.html">▶ 在线阅读本书</a>
-      <a class="btn btn-download" href="Build-a-Reasoning-Model-From-Scratch.pdf" download>
-        <span class="pdf-badge">PDF</span>
-        <span class="dl-info">
-          <b>下载全书 PDF</b>
-          <span>29 MB · 中英对照 · <span style="color:var(--pdf)">↓</span></span>
-        </span>
-      </a>
+    <!-- UNLOCKED STATE -->
+    <div id="unlockedView" class="unlocked">
+      <div class="ok">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h1>验证通过 ✓</h1>
+      <div class="acts">
+        <a class="a-read" href="book.html">▶ 在线阅读本书</a>
+        <a class="a-pdf" href="Build-a-Reasoning-Model-From-Scratch.pdf" download>
+          <span class="pdf-tag">PDF</span> 下载全书 PDF · 29 MB
+        </a>
+      </div>
+      <button class="logout" id="logoutBtn" type="button">退出并清除访问状态</button>
     </div>
-    <p class="dl-note">点击下载完整 PDF，方便离线阅读与打印</p>
-
-    <section>
-      <h3>本书内容</h3>
-      <p>推理是近年来提升大语言模型性能最令人振奋的重要进展之一，也是较容易被误解的概念——尤其是当你只在理论层面听说「推理」这个词时。</p>
-      <p>这本书采用实践导向：从一个预训练的基础 LLM 入手，逐行编写代码、分阶段为它添加推理能力，让你直观地看到推理系统究竟是如何工作的。全书为中英双语对照。</p>
-    </section>
-
-    <section>
-      <h3>你将掌握的阶段</h3>
-      <ul>
-        <li>多步思维链推理</li>
-        <li>SFT 监督微调</li>
-        <li>RLHF 偏好优化</li>
-        <li>GRPO 强化学习</li>
-        <li>推理模型训练管线</li>
-        <li>评测与部署思路</li>
-      </ul>
-    </section>
-
-    <section>
-      <h3>配套资源</h3>
-      <p>配套代码：<a class="code-link" href="https://github.com/rasbt/reasoning-from-scratch" target="_blank" rel="noopener">github.com/rasbt/reasoning-from-scratch</a></p>
-      <p>使用浏览器打开即可在线阅读，无需任何安装。阅读体验在桌面端与移动端均适配。</p>
-    </section>
-
-    <footer>
-      Build a Reasoning Model (From Scratch) · Build-a-Reasoning-Model-From-Scratch-CN-EN · 静态托管于 GitHub Pages
-    </footer>
   </div>
+
+<script>
+  const SESSION_KEY = "_rm_access";
+  // SHA-256 of password "rmbook2026"
+  const HASH = "313c92e692891912e7d84aa302d08ea117c91670f470313d79fc0168fa6b60e5";
+
+  async function sha256Hex(s){
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  }
+  async function verify(pwd){
+    const h = await sha256Hex(pwd);
+    let a=parseInt(HASH,16), b=parseInt(h,16), diff=a^b, ok=true;
+    while(diff){ if(diff&1){ ok=false; break; } diff>>>=1; }  // constant-ish time
+    return HASH === h && ok;
+  }
+
+  const $ = id=>document.getElementById(id);
+  function showUnlocked(){
+    $("loginView").style.display="none";
+    $("unlockedView").classList.add("on");
+  }
+
+  $("form").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const box=$("pwd"), err=$("err"), pwd=box.value;
+    err.textContent="";
+    if(!pwd){ box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake"); box.focus(); return; }
+    if(await verify(pwd)){
+      sessionStorage.setItem(SESSION_KEY,"1");
+      $("form").style.display="none";
+      showUnlocked();
+    }else{
+      err.textContent="密码错误，请重试";
+      box.value="";
+      box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake");
+      box.focus();
+    }
+  });
+
+  $("logoutBtn").addEventListener("click", ()=>{
+    sessionStorage.removeItem(SESSION_KEY);
+    location.reload();
+  });
+
+  // auto-unlock if already authorized this session
+  if(sessionStorage.getItem(SESSION_KEY)==="1") showUnlocked();
+</script>
 </body>
 </html>
